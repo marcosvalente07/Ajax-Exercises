@@ -29,4 +29,11 @@ app.post('/upload', (req, res) => {
     })
 })
 
+app.post('/form', (req, res) => {
+    res.send({
+        ...req.body,
+        id: 1
+    })
+})
+
 app.listen(8081, () => console.log('Executando....'))

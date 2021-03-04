@@ -22,13 +22,30 @@
 
 <body class="content exercise">
     <h1>Formulário Via Fetch</h1>
-    <form name="usuarioForm" action="formulario" method="post">
-        <input type="text" name="nome" placeholder="Nome..." />
-        <input type="text" name="sobrenome" placeholder="Sobrenome..." />
+    <form name="userForm" action="form" method="post">
+        <input type="text" name="name" placeholder="Nome..." />
+        <input type="text" name="surname" placeholder="Sobrenome..." />
         <button>Salvar</button>
     </form>
-    <div id="resultado"></div>
+    <div id="result"></div>
     <script>
-        // ...
+        document.userForm.onsubmit = async e => {
+            e.preventDefault()
+
+            const form = e.target
+            const data = new FormData(form)
+
+            const options = {
+                method: form.method,
+                body: new URLSearchParams(data)
+            }
+
+            fetch(form.action, options)
+                .then(response => response.json())
+                .then(json => {
+                    const result = document.getElementById('result')
+                    result.innerHTML = JSON.stringify(json)
+                })
+        }
     </script>
 </body>
