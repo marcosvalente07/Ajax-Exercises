@@ -40,11 +40,15 @@
                 body: new URLSearchParams(data)
             }
 
+            const result = document.getElementById('result')
+
             fetch(form.action, options)
                 .then(response => response.json())
                 .then(json => {
-                    const result = document.getElementById('result')
                     result.innerHTML = JSON.stringify(json)
+                })
+                .catch(e => {
+                    result.innerHTML = e
                 })
         }
     </script>
